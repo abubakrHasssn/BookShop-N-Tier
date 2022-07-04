@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CoverType>
+@{
+    ViewData["Title"] = "Cover Types";
+}
+<partial name="_Notifications"/>
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <h3 class="text-primary">Cover Type List</h3>
+        </div>
+        <div class="col-md-6 text-end">
+            <a asp-controller="CoverType" asp-action="Create" class="btn btn-primary" > <i class="bi bi-plus-circle"></i> &nbsp; Create New CoverType</a>
+        </div>
+    </div>
+    <br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th class="text-center"><i class="bi bi-gear"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mod in Model)
+        {
+        <tr>
+            <td>@mod.Name </td>
+            <td class="text-center">
+                <a class="btn btn-primary" asp-controller="CoverType" asp-action="Edit" asp-route-Id="@mod.Id" >Edit</a>
+                <a class="btn btn-danger" asp-controller="CoverType" asp-action="Delete" asp-route-Id="@mod.Id" >Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+</div>

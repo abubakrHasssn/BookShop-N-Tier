@@ -1,0 +1,26 @@
+﻿@model CoverType
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h3 class="text-primary">@(Model == null ? "Create Cover Type" : "Update Cover Type" )</h3>
+            <hr />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2" style="width:150px;">Save</button>
+        <a asp-controller="CoverType" asp-action="index" class="btn btn-secondary mt-2" style="width:150px;">Back To List</a>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
