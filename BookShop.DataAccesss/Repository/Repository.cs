@@ -24,16 +24,31 @@ namespace BookShop.DataAccess.Repository
             DbSet.Add(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        //include properties -ex "Category,CoverType"
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = DbSet;
+            if (includeProperties != null)
+            {
+                foreach (var prop in includeProperties.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
             return query.ToList();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = DbSet;
             query = query.Where(filter);
+            if (includeProperties != null)
+            {
+                foreach (var prop in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
             return query.FirstOrDefault();
         }
 
