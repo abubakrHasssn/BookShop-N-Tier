@@ -22,8 +22,7 @@ function loadDataTable() {
                     <a href="/Admin/Product/Upsert?id=${data}" class="btn btn-primary">Edit</a>
                     <a onclick="Delete('/Admin/Product/Delete?id=${data}')" class="btn btn-danger">Delete</a>
                             `
-                },
-                "width": "15%"
+                }
             }
             ]
     });
