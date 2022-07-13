@@ -19,15 +19,20 @@ namespace BookShop.DataAccess.Repository
             _context = context;
             DbSet = _context.Set<T>();
         }
-        public void Add(T entity)
+        public void Add(T entity) 
         {
             DbSet.Add(entity);
         }
 
         //include properties -ex "Category,CoverType"
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties = null)
         {
             IQueryable<T> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
             if (includeProperties != null)
             {
                 foreach (var prop in includeProperties.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries))

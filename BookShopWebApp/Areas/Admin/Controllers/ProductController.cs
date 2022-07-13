@@ -103,7 +103,7 @@ namespace BookShopWebApp.Controllers
 
         public IActionResult GetAll()
         {
-            var products = _context.Product.GetAll("Category");
+            var products = _context.Product.GetAll(includeProperties:"Category");
 
             return Ok( new {Data = products});
         }
